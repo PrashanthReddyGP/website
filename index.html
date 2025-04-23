@@ -1,349 +1,603 @@
-One Piece Re-imagined.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luffy the Storyteller - Arc: The Ballad of Baratie Bistro</title>
+    <title>Your Name - Creative Portfolio</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome (for icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #e0f7fa; /* Light sea blue */
-            color: #333;
+        /* --- Base Styles & Variables --- */
+        :root {
+            --primary-color: #ffffff; /* Text color */
+            --secondary-color: #cccccc; /* Lighter text/borders */
+            --accent-color: #00ffff; /* Accent for highlights/links */
+            --background-start: #051937;
+            --background-mid1: #004d7a;
+            --background-mid2: #008793;
+            --background-end: #00bf72;
+            --card-background: rgba(255, 255, 255, 0.08);
+            --card-hover-background: rgba(255, 255, 255, 0.15);
+            --font-main: 'Poppins', sans-serif;
+        }
+
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--primary-color);
+            background: linear-gradient(-45deg, var(--background-start), var(--background-mid1), var(--background-mid2), var(--background-end));
+            background-size: 400% 400%;
+            animation: gradientBG 25s ease infinite;
             line-height: 1.6;
-            background-image: url('https://www.transparenttextures.com/patterns/worn-dots.png'); /* Subtle texture */
+            overflow-x: hidden; /* Prevent horizontal scroll */
         }
-        #container {
-            max-width: 900px;
-            margin: 20px auto;
-            background-color: #ffffff;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            overflow: hidden;
-            border: 5px solid #0277bd; /* Ocean blue border */
+
+        /* --- Animated Gradient Background --- */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
-        header {
-            background-color: #0277bd; /* Ocean blue */
-            color: white;
-            padding: 20px;
-            text-align: center;
-            border-bottom: 5px solid #fbc02d; /* Sunny yellow accent */
+
+        /* --- Reusable Components --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 30px;
         }
-        header h1 {
-            margin: 0;
-            font-family: 'Impact', fantasy; /* Punchy font */
-            font-size: 2.8em;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+
+        section {
+            padding: 100px 0;
+            overflow: hidden; /* Contain animations */
         }
-        #music-player {
-            text-align: center;
-            padding: 10px;
-            background-color: #fffde7; /* Light parchment */
-            font-size: 0.9em;
-            border-bottom: 1px solid #eee;
-        }
-        #music-player iframe {
-           max-width: 100%;
-           height: 60px; /* Smaller height for audio */
-        }
-        #story-content {
-            padding: 25px;
-        }
-        .scene {
+
+        h1, h2, h3 {
+            font-weight: 600;
             margin-bottom: 20px;
-            padding: 15px;
-            background-color: #f1f8e9; /* Very light green */
-            border-left: 5px solid #8bc34a; /* Leaf green */
+        }
+
+        h1 { font-size: 3rem; line-height: 1.2; }
+        h2 { font-size: 2.5rem; color: var(--accent-color); }
+        p { margin-bottom: 15px; color: var(--secondary-color); font-weight: 300; }
+        a { color: var(--accent-color); text-decoration: none; transition: color 0.3s ease; }
+        a:hover { color: var(--primary-color); }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: transparent;
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
             border-radius: 5px;
+            margin-top: 15px;
+            transition: background 0.3s ease, color 0.3s ease;
         }
-        .scene h2 {
-            color: #0277bd; /* Ocean blue */
-            margin-top: 0;
-            border-bottom: 2px solid #fbc02d; /* Sunny yellow */
-            padding-bottom: 5px;
+
+        .btn:hover {
+            background: var(--accent-color);
+            color: #000; /* Dark text on hover */
         }
-        .luffy-dialogue {
-            font-weight: bold;
-            color: #d32f2f; /* Luffy's red */
-            margin-left: 10px;
-            font-style: italic;
+
+        /* --- Navigation --- */
+        #navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+            backdrop-filter: blur(10px); /* Frosty effect */
+            padding: 15px 0;
+            z-index: 1000;
+            transition: background 0.3s ease;
         }
-        .narrative {
-            margin-bottom: 10px;
+
+        #navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .choice button, .action button {
-            background-color: #fbc02d; /* Sunny yellow */
-            color: #333;
-            border: 2px solid #c79100;
-            padding: 10px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: bold;
-            margin: 5px;
-            transition: background-color 0.3s, transform 0.2s;
+
+        #navbar .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
         }
-        .choice button:hover, .action button:hover {
-            background-color: #fdd835; /* Lighter yellow */
-            transform: scale(1.05);
+
+        #navbar ul {
+            list-style: none;
+            display: flex;
         }
-        .character-intro {
-            background-color: #fffde7; /* Light parchment */
-            border: 1px dashed #ccc;
-            padding: 10px;
-            margin: 15px 0;
-            border-radius: 5px;
+
+        #navbar ul li {
+            margin-left: 25px;
         }
-        .character-intro strong {
-            color: #01579b; /* Darker blue */
+
+        #navbar ul li a {
+            color: var(--secondary-color);
+            font-weight: 400;
+            padding-bottom: 5px; /* Space for underline effect */
+            position: relative;
         }
-        .story-spark {
-            font-style: italic;
-            color: #7b1fa2; /* Purple for magical effect */
-            animation: pulse 1.5s infinite;
-            display: inline-block; /* Needed for animation */
-        }
-         @keyframes pulse {
-            0% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.05); opacity: 1; }
-            100% { transform: scale(1); opacity: 0.8; }
-        }
-        .hidden {
-            display: none;
-        }
-        img.character-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            vertical-align: middle;
-            margin-right: 10px;
-            border: 2px solid #0277bd;
-        }
-         footer {
-            text-align: center;
-            padding: 10px;
-            font-size: 0.8em;
-            color: #666;
-            margin-top: 20px;
-            border-top: 1px solid #eee;
+         #navbar ul li a::after { /* Underline effect */
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
          }
+
+        #navbar ul li a:hover,
+        #navbar ul li a.active {
+            color: var(--primary-color);
+        }
+        #navbar ul li a:hover::after,
+        #navbar ul li a.active::after {
+            width: 100%;
+        }
+
+
+        /* --- Hero Section --- */
+        #hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-top: 60px; /* Account for navbar */
+        }
+
+        #hero h1 {
+            animation: fadeInDown 1s ease-out;
+        }
+
+        #hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 25px;
+            animation: fadeInUp 1s ease-out 0.5s;
+            animation-fill-mode: backwards; /* Start hidden */
+        }
+
+        #hero .btn {
+             animation: fadeInUp 1s ease-out 1s;
+             animation-fill-mode: backwards; /* Start hidden */
+        }
+
+        /* --- About Section --- */
+        #about .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            align-items: center;
+        }
+         #about img.profile-pic { /* Example class for an image */
+            max-width: 100%;
+            width: 350px; /* Adjust size */
+            height: 350px;
+            object-fit: cover;
+            border-radius: 50%; /* Make it circular */
+            border: 3px solid var(--accent-color);
+            justify-self: center; /* Center in grid cell */
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
+            opacity: 0; /* Start hidden for animation */
+            transform: scale(0.9);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+         }
+
+         #about .about-content {
+             opacity: 0; /* Start hidden for animation */
+             transform: translateX(30px);
+             transition: opacity 0.6s ease-out 0.2s, transform 0.6s ease-out 0.2s;
+         }
+
+         /* Animation Trigger Classes */
+         .visible {
+             opacity: 1 !important;
+             transform: none !important;
+         }
+
+
+        /* --- Projects Section --- */
+        #projects h2 { text-align: center; }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .project-card {
+            background: var(--card-background);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            opacity: 0; /* Start hidden */
+            transform: translateY(30px);
+             transition: opacity 0.5s ease-out, transform 0.5s ease-out, background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Stagger project card animations */
+        .project-card:nth-child(1) { transition-delay: 0.1s; }
+        .project-card:nth-child(2) { transition-delay: 0.2s; }
+        .project-card:nth-child(3) { transition-delay: 0.3s; }
+        /* Add more delays if needed */
+
+
+        .project-card:hover {
+            background: var(--card-hover-background);
+            transform: translateY(-5px) !important; /* Override scroll animation transform slightly */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 200px; /* Fixed height for consistency */
+            object-fit: cover;
+            display: block;
+        }
+
+        .project-info {
+            padding: 20px;
+        }
+
+        .project-info h3 {
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+            color: var(--primary-color);
+        }
+
+        .project-info p {
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .project-links a {
+            margin-right: 10px;
+            font-size: 0.9rem;
+        }
+        .project-links a i { /* Icon styling */
+            margin-right: 5px;
+        }
+
+        /* --- Contact Section --- */
+        #contact {
+            text-align: center;
+        }
+
+         #contact form {
+            max-width: 600px;
+            margin: 40px auto 0;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            opacity: 0; /* Start hidden */
+            transform: translateY(30px);
+             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+         #contact input,
+         #contact textarea {
+            width: 100%;
+            padding: 15px;
+            background: var(--card-background);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            color: var(--primary-color);
+            font-family: var(--font-main);
+            font-size: 1rem;
+         }
+         #contact input::placeholder,
+         #contact textarea::placeholder {
+            color: var(--secondary-color);
+         }
+
+         #contact textarea {
+            min-height: 150px;
+            resize: vertical;
+         }
+
+         #contact button[type="submit"] {
+             justify-self: center; /* Center button in grid */
+             width: fit-content; /* Size button to content */
+         }
+
+        .social-links {
+            margin-top: 40px;
+        }
+
+        .social-links a {
+            color: var(--secondary-color);
+            font-size: 1.8rem;
+            margin: 0 15px;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+            transform: scale(1.2);
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 60px;
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* --- Animations --- */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Responsiveness --- */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+
+            #navbar .container {
+                flex-direction: column;
+                align-items: center;
+            }
+            #navbar .logo { margin-bottom: 10px;}
+            #navbar ul { padding-top: 10px; }
+            #navbar ul li { margin: 0 10px; }
+
+            #hero { padding: 120px 0 60px 0; /* Adjust padding for stacked nav */ }
+
+            #about .container {
+                grid-template-columns: 1fr; /* Stack elements */
+                text-align: center;
+            }
+             #about img.profile-pic {
+                 margin-bottom: 30px;
+                 width: 250px; /* Smaller on mobile */
+                 height: 250px;
+             }
+
+             .project-grid {
+                grid-template-columns: 1fr; /* Stack projects */
+             }
+        }
+
     </style>
 </head>
 <body>
 
-<div id="container">
-    <header>
-        <h1>Luffy the Storyteller</h1>
-        <p>Arc 1: The Ballad of Baratie Bistro</p>
-    </header>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="container">
+            <a href="#hero" class="logo">Your Name</a>
+            <ul>
+                <li><a href="#hero" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
 
-    <div id="music-player">
-        <p>Set the mood! Press play for some One Piece vibes (May require interaction):</p>
-        <!-- Found a long mix, replace URL if it goes down -->
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PLhPw5YGuJZ9NKYHjWpJ5n55G4y_j8kE3n&autoplay=1&loop=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-         <p><small>(Music might not autoplay on all browsers/devices - click play inside the frame if needed!)</small></p>
-    </div>
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="container">
+            <h1>Hi, I'm [Your Name]</h1>
+            <p>I'm a [Your Role - e.g., Web Developer, Designer, Artist] creating engaging and unique digital experiences.</p>
+            <a href="#projects" class="btn">View My Work</a>
+        </div>
+    </section>
 
-    <div id="story-content">
-
-        <!-- Scene 1: Arrival -->
-        <div class="scene" id="scene1">
-            <h2>The Scent of Salt and Stories</h2>
-            <p class="narrative">
-                The bus wheezed to a stop, depositing Luffy, Usopp, and Nami near a weathered, fish-shaped building perched precariously over the churning sea. Waves crashed below, sending salty spray into the air. This was the Baratie Bistro, famed 'Echo Isle'. The air itself seemed thick with untold tales and the mouth-watering aroma of cooking.
-            </p>
-            <p><img src="https://via.placeholder.com/50/FF0000/FFFFFF?text=L" alt="Luffy Icon" class="character-icon"><span class="luffy-dialogue">Shishishi! Smells like adventure... and MEAT!</span></p>
-            <p class="narrative">Nami checked her worn map, then her nearly empty wallet.</p>
-            <p><img src="https://via.placeholder.com/50/FFA500/FFFFFF?text=N" alt="Nami Icon" class="character-icon">"Alright, Luffy. Remember the plan. We find this 'Sanji' chef, see if his food *really* inspires stories, and maybe get a free meal if Usopp's 'legendary hero' tales work."</p>
-            <p><img src="https://via.placeholder.com/50/FFFF00/000000?text=U" alt="Usopp Icon" class="character-icon">"Leave it to Captain Usopp! They'll be feeding us like kings after they hear of my daring exploits!" *He puffs out his chest, nervously glancing at the imposing restaurant.*</p>
-            <div class="choice">
-                <button onclick="showScene('scene2_enter')">Charge right into the Baratie!</button>
-                <button onclick="showScene('scene2_observe')">Observe the Bistro from outside first.</button>
+    <!-- About Section -->
+    <section id="about" class="scroll-reveal">
+        <div class="container">
+             <!-- Placeholder image - replace 'src' with a real URL or path if you host one -->
+             <img src="https://via.placeholder.com/350/00ffff/051937?text=Your+Photo" alt="Your Name" class="profile-pic">
+            <div class="about-content">
+                <h2>About Me</h2>
+                <p>Hello! I'm [Your Name], passionate about [Your Field/Interest 1] and [Your Field/Interest 2]. I thrive on solving problems and bringing ideas to life through code and creativity.</p>
+                <p>With experience in [mention key skills like front-end development, UI/UX design, specific software, etc.], I focus on delivering high-quality, user-centric results. Let's create something amazing together!</p>
+                <a href="#contact" class="btn">Get In Touch</a>
             </div>
         </div>
+    </section>
 
-        <!-- Scene 2 Option A: Enter -->
-        <div class="scene hidden" id="scene2_enter">
-            <h2>Chaos in the Kitchen</h2>
-            <p class="narrative">
-                Luffy didn't wait, bursting through the doors with a yell. <span class="luffy-dialogue">"FOOD! STORIES! HELLO!"</span> The inside was bustling, a chaotic symphony of clanging pans, shouting chefs, and diners laughing. Presiding over it all from a high stool near the kitchen was a stern-looking man with a braided blonde moustache and a prosthetic leg – Zeff. But before anyone could react to Luffy's entrance, a commotion erupted from the kitchen.
-            </p>
-            <p class="narrative">
-                A figure in a chef's uniform, blond hair obscuring one eye, a cigarette dangling from his lips, sent a rude customer flying with a precise, powerful kick. "Get out! Never waste food in front of me, you scum!" he yelled, his voice smooth but laced with fury. Dishes crashed. Nami groaned. Usopp hid behind Luffy.
-            </p>
-            <div class="character-intro">
-                <strong><img src="https://via.placeholder.com/50/0000FF/FFFFFF?text=S" alt="Sanji Icon" class="character-icon">Character Introduced: Sanji</strong> - A passionate, fiery chef working at the Baratie. Reveres food and women, detests waste. His kicks are legendary amongst the staff.
-            </div>
-             <p><img src="https://via.placeholder.com/50/FF0000/FFFFFF?text=L" alt="Luffy Icon" class="character-icon"><span class="luffy-dialogue">Whoa! Awesome kick! Are you Sanji? Can you make food that tells stories?!</span></p>
-            <div class="action">
-                 <button onclick="showScene('scene3_approachSanji')">Approach the angry chef (Sanji).</button>
-                 <button onclick="showScene('scene3_approachZeff')">Try talking to the head chef (Zeff).</button>
-            </div>
-        </div>
+    <!-- Projects Section -->
+    <section id="projects" class="scroll-reveal">
+        <div class="container">
+            <h2>My Projects</h2>
+            <div class="project-grid">
+                <!-- Project Card 1 -->
+                <div class="project-card scroll-reveal">
+                    <!-- Replace with your project image URL -->
+                    <img src="https://via.placeholder.com/400x200/008793/ffffff?text=Project+One" alt="Project One">
+                    <div class="project-info">
+                        <h3>Project Title One</h3>
+                        <p>Short description of the project, highlighting key features or technologies used (e.g., React, Node.js, Figma).</p>
+                        <div class="project-links">
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="btn"><i class="fas fa-eye"></i> Live Demo</a>
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="btn"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                </div>
 
-         <!-- Scene 2 Option B: Observe -->
-        <div class="scene hidden" id="scene2_observe">
-            <h2>Whispers on the Wind</h2>
-            <p class="narrative">
-                Nami managed to hold Luffy back for a moment. "Hold on, let's see what we're walking into." They watched from near the entrance. The Baratie was lively, filled with sailors, locals, and tourists. The smell of delicious food was almost overwhelming. They overheard snippets of conversation: "...heard Chef Sanji's seafood pasta makes you remember your first love...", "...Zeff runs a tight ship, but he's got a heart of gold...", "...Watch out for the 'Critique Pirates', they were sniffing around earlier..."
-            </p>
-             <p><img src="https://via.placeholder.com/50/FFA500/FFFFFF?text=N" alt="Nami Icon" class="character-icon">"'Critique Pirates'? That sounds ominous. Maybe we should be cautious."</p>
-             <p><img src="https://via.placeholder.com/50/FF0000/FFFFFF?text=L" alt="Luffy Icon" class="character-icon"><span class="luffy-dialogue">Critics? Who cares! I wanna try that pasta story! Let's go!</span></p>
-            <p class="narrative">Just then, a commotion erupted inside. A customer went flying out the door, propelled by a powerful kick from a blond chef with a cigarette.</p>
-             <div class="character-intro">
-                <strong><img src="https://via.placeholder.com/50/0000FF/FFFFFF?text=S" alt="Sanji Icon" class="character-icon">Character Introduced: Sanji</strong> - A passionate, fiery chef working at the Baratie. Reveres food and women, detests waste. His kicks are legendary amongst the staff.
-            </div>
-            <div class="action">
-                 <button onclick="showScene('scene3_approachSanji')">Help the customer / Approach Sanji.</button>
-                 <button onclick="showScene('scene3_enterQuietly')">Try to slip inside unnoticed during the chaos.</button>
-            </div>
-        </div>
+                <!-- Project Card 2 -->
+                <div class="project-card scroll-reveal">
+                     <!-- Replace with your project image URL -->
+                    <img src="https://via.placeholder.com/400x200/00bf72/ffffff?text=Project+Two" alt="Project Two">
+                    <div class="project-info">
+                        <h3>Project Title Two</h3>
+                        <p>Another project description. Maybe this one focused on UX design or a specific backend technology.</p>
+                         <div class="project-links">
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="btn"><i class="fas fa-eye"></i> Live Demo</a>
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="btn"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                </div>
 
-        <!-- Scene 3 (Converging point, adjust text based on previous choice slightly if needed) -->
-        <div class="scene hidden" id="scene3_approachSanji">
-            <h2>Meeting the Fiery Chef</h2>
-            <p class="narrative">
-                Ignoring Nami's warnings (or Usopp's trembling), Luffy approached the blond chef, Sanji, who was lighting a new cigarette, looking thoroughly annoyed.
-            </p>
-             <p><img src="https://via.placeholder.com/50/FF0000/FFFFFF?text=L" alt="Luffy Icon" class="character-icon"><span class="luffy-dialogue">That was amazing! Your food sounds amazing too! I'm Luffy, I'm gonna be the King of Storytellers! Can you join my crew and cook story-food?</span></p>
-            <p class="narrative">
-                Sanji blinked, smoke curling around his face. He looked Luffy up and down. Before he could answer, Zeff's gruff voice cut through the air. "Sanji! Less kicking, more cooking! And who are these brats?"
-            </p>
-            <p class="narrative">Just then, a group of people in sharp suits entered, led by a man with an arrogant smirk. "Well, well. The infamous Baratie Bistro. We are the Critique Pirates. Prepare for a thorough... *deconstruction*." The air grew tense.</p>
-            <div class="action">
-                 <button onclick="showScene('scene4_confrontation')">Stand with Sanji and Zeff against the critics.</button>
-                 <button onclick="showScene('scene4_luffyDistraction')">Luffy tries to distract everyone with a spontaneous story.</button>
+                <!-- Project Card 3 (Add more as needed) -->
+                <div class="project-card scroll-reveal">
+                     <!-- Replace with your project image URL -->
+                    <img src="https://via.placeholder.com/400x200/004d7a/ffffff?text=Project+Three" alt="Project Three">
+                    <div class="project-info">
+                        <h3>Project Title Three</h3>
+                        <p>Briefly describe this project. Perhaps it's a mobile app concept or a data visualization piece.</p>
+                         <div class="project-links">
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="btn"><i class="fas fa-eye"></i> Live Demo</a>
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="btn"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+    </section>
 
-        <!-- Other Scene 3 branches would lead here or similar points -->
-        <div class="scene hidden" id="scene3_approachZeff">
-             <h2>Audience with the Owner</h2>
-             <p class="narrative">Nami steered them towards the imposing Head Chef Zeff. "Excuse me, Mr. Zeff? We heard this place inspires great stories..." Zeff eyed them skeptically. "Stories, eh? This is a restaurant, girlie. We serve food, not fairy tales." Suddenly, Sanji kicked a customer out. Zeff sighed. "That damn eggplant..." Luffy immediately ran towards Sanji. <span class="luffy-dialogue">"Awesome kick! Are you Sanji?"</span> The scene converges similarly to `scene3_approachSanji`.</p>
-             <p class="narrative">Just then, the Critique Pirates enter... </p>
-             <div class="action">
-                 <button onclick="showScene('scene4_confrontation')">Stand with the Baratie staff.</button>
-                 <button onclick="showScene('scene4_luffyDistraction')">Luffy tries to distract everyone with a spontaneous story.</button>
+    <!-- Contact Section -->
+    <section id="contact" class="scroll-reveal">
+        <div class="container">
+            <h2>Contact Me</h2>
+            <p>Interested in collaborating or have a question? Send me a message!</p>
+
+            <!-- Basic Form structure (needs backend/service like Formspree for actual sending) -->
+            <form action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST" class="scroll-reveal">
+                 <!-- Replace YOUR_FORMSPREE_ID with your actual Formspree endpoint ID -->
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" required></textarea>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+
+            <div class="social-links scroll-reveal">
+                 <!-- Replace # with your actual profile links -->
+                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Github"><i class="fab fa-github"></i></a>
+                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X"><i class="fab fa-twitter"></i></a>
+                <a href="mailto:youremail@example.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                <!-- Add other relevant links -->
             </div>
         </div>
+    </section>
 
-         <div class="scene hidden" id="scene3_enterQuietly">
-             <h2>Inside the Storm</h2>
-             <p class="narrative">They slipped inside amidst the chaos of the ejected customer. They saw Sanji arguing with Zeff, the tension palpable. Before they could decide who to approach, the Critique Pirates made their entrance. "Well, well. The infamous Baratie Bistro..." The atmosphere shifted instantly.</p>
-             <div class="action">
-                 <button onclick="showScene('scene4_confrontation')">Defend the Bistro! (Step forward)</button>
-                 <button onclick="showScene('scene4_luffyDistraction')">Luffy senses the tension: "Time for a story!"</button>
-            </div>
-        </div>
-
-
-        <!-- Scene 4: Confrontation -->
-         <div class="scene hidden" id="scene4_confrontation">
-             <h2>Critique Pirates Attack!</h2>
-             <p class="narrative">Fullbody, leader of the Critique Pirates, sneered. "Your 'passionate' cooking, your 'emotional' stories... it's all unrefined dribble. We're here to impose some *standards*." His crew started heckling the diners and staff, trying to disrupt the atmosphere.</p>
-             <p class="narrative">Sanji stepped forward, fists clenched (ready for kicking). "You talkin' about food? Or the old man's heart? Either way, you're outta line." Zeff glared, his peg leg tapping ominously.</p>
-             <p><img src="https://via.placeholder.com/50/FF0000/FFFFFF?text=L" alt="Luffy Icon" class="character-icon"><span class="luffy-dialogue">Hey! Leave them alone! Stories and food are best when they come from the heart! Shishishi!</span></p>
-             <p class="narrative">Fullbody laughed mockingly. "Heart? How utterly... sentimental. Prove it, street urchin."</p>
-             <div class="action">
-                 <button onclick="showScene('scene5_luffyStory')">Luffy tells a story fueled by the Baratie's energy.</button>
-                 <button onclick="showScene('scene5_teamUp')">Fight alongside Sanji! (Metaphorically, maybe an intense debate or Usopp's tall tales vs their critiques?)</button>
-             </div>
-         </div>
-
-         <div class="scene hidden" id="scene4_luffyDistraction">
-             <h2>An Unexpected Tale</h2>
-             <p class="narrative">Sensing the rising tension, Luffy suddenly jumped onto a table. <span class="luffy-dialogue">"HEY EVERYONE! WANNA HEAR A STORY?!"</span> His voice, brimming with energy, cut through the hostility. The Critique Pirates looked momentarily confused.</p>
-             <p><img src="https://via.placeholder.com/50/FFA500/FFFFFF?text=N" alt="Nami Icon" class="character-icon">"Luffy, now is not the time!"</p>
-             <p><img src="https://via.placeholder.com/50/FFFF00/000000?text=U" alt="Usopp Icon" class="character-icon">"Y-yeah! Unless... unless it's the story of Captain Usopp defeating fifty critics with a single word!"</p>
-             <p class="narrative">Sanji raised an eyebrow, a flicker of amusement in his eyes. Zeff watched impassively. Fullbody scoffed, "A distraction? Pathetic."</p>
-             <div class="action">
-                 <button onclick="showScene('scene5_luffyStory')">Tell the story anyway! Capture their attention!</button>
-                  <button onclick="showScene('scene5_teamUp')">Use the distraction to team up with Sanji verbally.</button>
-             </div>
-         </div>
-
-
-        <!-- Scene 5 Climax -->
-        <div class="scene hidden" id="scene5_luffyStory">
-            <h2>The Power of Passion</h2>
-            <p class="narrative">Luffy took a deep breath, grinned, and began. He didn't tell a polished epic, but a raw, energetic tale about freedom, friendship, and chasing dreams against all odds. He spoke of shared meals under starry skies, of overcoming impossible challenges with sheer willpower. As he spoke, fueled by the Baratie's unique 'Echo Isle' energy and the passion radiating from Sanji and Zeff, something happened.</p>
-            <p class="narrative">Tiny, shimmering lights began to appear in the air around Luffy – <span class="story-spark">Story Sparks!</span> Faint at first, then brighter, more numerous. The diners gasped. Even the Critique Pirates faltered, momentarily stunned by the unexpected phenomenon.</p>
-            <p class="narrative">Sanji stared, cigarette falling from his lips. He felt... something. A resonance. A reminder of his own hidden dream – the All Blue, a place where all the world's recipes could be found.</p>
-            <p class="narrative">Luffy finished with a booming laugh. <span class="luffy-dialogue">"See?! Stories are AWESOME!"</span></p>
-            <p class="narrative">Fullbody, unnerved by the Sparks, stammered, "Tricks! Cheap illusions!" But his voice lacked conviction. His crew looked uncertain.</p>
-            <div class="action">
-                 <button onclick="showScene('scene6_resolution')">Press the advantage! Drive the critics out!</button>
-            </div>
-        </div>
-
-         <div class="scene hidden" id="scene5_teamUp">
-            <h2>Words and Kicks</h2>
-            <p class="narrative">Luffy's energy was infectious. Sanji, seeing Luffy's simple defense of passion, smirked. "He's right, you know. You wouldn't understand the soul of cooking if it kicked you in the face." He stepped forward, not physically attacking, but verbally dissecting the critics' cold logic with sharp, passionate arguments about flavor, memory, and the joy of eating.</p>
-            <p class="narrative">Usopp, emboldened, launched into a wildly exaggerated tale of how *he* once debated a hundred critics into silence. Nami chimed in with cutting remarks about their lack of understanding of 'value'.</p>
-            <p class="narrative">Luffy cheered them on. <span class="luffy-dialogue">"Yeah! Tell 'em! Shishishi!"</span> His sheer belief in his friends seemed to amplify their words. Small <span class="story-spark">Story Sparks</span> flickered around Sanji and Usopp as they spoke with genuine fervor.</p>
-            <p class="narrative">The Critique Pirates, overwhelmed by the unexpected, passionate counter-attack and the strange lights, began to backpedal.</p>
-             <div class="action">
-                 <button onclick="showScene('scene6_resolution')">Drive the critics out!</button>
-             </div>
-         </div>
-
-
-        <!-- Scene 6: Resolution -->
-        <div class="scene hidden" id="scene6_resolution">
-            <h2>A New Ally (and a Meal!)</h2>
-            <p class="narrative">Whether through Luffy's story or the team's verbal barrage, the Critique Pirates were routed. They fled the Baratie amidst the cheers of the diners and staff, muttering about reporting this 'anomaly'.</p>
-            <p class="narrative">Zeff let out a gruff chuckle. "Hmph. Not bad, brats."</p>
-            <p class="narrative">Sanji walked over to Luffy, lighting another cigarette. He looked thoughtful. "Oi, storyteller. Your tales... they got guts. And you defended the kitchen's heart." He paused. "...You need a cook for your 'Story Crew'?"</p>
-            <p><img src="https://via.placeholder.com/50/FF0000/FFFFFF?text=L" alt="Luffy Icon" class="character-icon"><span class="luffy-dialogue">YEAH! REALLY?! Awesome! Let's eat first! I'm starving! MEAT!</span></p>
-            <p class="narrative">Sanji sighed, a small smile playing on his lips. "Fine. But Nami-swan eats first." He winked at a flustered Nami.</p>
-            <p class="narrative">As Sanji disappeared into the kitchen, promising a meal that would tell its own story, Luffy beamed. They had faced their first challenge, defended an Echo Isle, and gained a powerful new ally. The journey to the One Tale felt a little closer.</p>
-            <div class="character-intro">
-                <strong><img src="https://via.placeholder.com/50/0000FF/FFFFFF?text=S" alt="Sanji Icon" class="character-icon">Sanji has joined Luffy's Story Crew!</strong> His goal: Find the All Blue through the inspiration of stories and food.
-            </div>
-            <h2>End of Arc: The Ballad of Baratie Bistro</h2>
-            <button onclick="location.reload()">Restart the Arc?</button>
-        </div>
-
-    </div> <!-- End Story Content -->
-
+    <!-- Footer -->
     <footer>
-        One Piece reimagined by AI & Human | Story elements inspired by Eiichiro Oda | Music from YouTube embeds | Enjoy the adventure!
+        <div class="container">
+            <p>&copy; <span id="year"></span> [Your Name]. All Rights Reserved.</p>
+        </div>
     </footer>
 
-</div> <!-- End Container -->
+    <script>
+        // --- Dynamic Year in Footer ---
+        document.getElementById('year').textContent = new Date().getFullYear();
 
-<script>
-    function showScene(sceneId) {
-        // Hide all scenes first
-        const scenes = document.querySelectorAll('.scene');
-        scenes.forEach(scene => {
-            scene.style.display = 'none';
+        // --- Scroll-Triggered Animations ---
+        const scrollElements = document.querySelectorAll('.scroll-reveal');
+
+        const elementInView = (el, dividend = 1) => {
+            const elementTop = el.getBoundingClientRect().top;
+            return (
+                elementTop <= (window.innerHeight || document.documentElement.clientHeight) / dividend
+            );
+        };
+
+        const displayScrollElement = (element) => {
+            element.classList.add('visible');
+        };
+
+        const hideScrollElement = (element) => {
+            element.classList.remove('visible');
+        };
+
+        const handleScrollAnimation = () => {
+            scrollElements.forEach((el) => {
+                // Trigger animation when element is about 85% in view
+                if (elementInView(el, 1.15)) {
+                    displayScrollElement(el);
+                }
+                // Optional: Hide element again if scrolled back up past it
+                // else {
+                //     hideScrollElement(el);
+                // }
+            });
+        };
+
+        // Initialize Intersection Observer for better performance
+        let observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Optional: Unobserve after first time for performance
+                    // observer.unobserve(entry.target);
+                } else {
+                     // Optional: Remove 'visible' if you want animations to reset on scroll out
+                    // entry.target.classList.remove('visible');
+                }
+            });
+        }, { threshold: 0.1 }); // Trigger when 10% of the element is visible
+
+        scrollElements.forEach(el => {
+            observer.observe(el);
         });
 
-        // Show the target scene
-        const targetScene = document.getElementById(sceneId);
-        if (targetScene) {
-            targetScene.style.display = 'block';
-            // Scroll to the top of the new scene for better visibility
-             window.scrollTo({ top: targetScene.offsetTop - 80, behavior: 'smooth' });
-        } else {
-            console.error("Scene ID not found:", sceneId);
-        }
-    }
 
-    // Initially, show only the first scene
-    document.addEventListener('DOMContentLoaded', () => {
-        showScene('scene1');
-        // Attempt to deal with autoplay restrictions - focus the iframe perhaps?
-        const iframe = document.querySelector('#music-player iframe');
-        if (iframe) {
-             // We can't directly trigger play due to browser restrictions,
-             // but focusing might help on some browsers if user interacts shortly after.
-             // Best approach is user clicking play.
-        }
-    });
-</script>
+        // --- Active Navigation Link Highlighting on Scroll ---
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('#navbar .nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                 // Add a pixel offset to trigger highlight slightly earlier
+                if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Handle edge case for top of page
+             if (pageYOffset < sections[0].offsetTop - window.innerHeight / 2) {
+                 navLinks.forEach(link => link.classList.remove('active'));
+                 document.querySelector('#navbar .nav-link[href="#hero"]').classList.add('active');
+             }
+        });
+
+    </script>
 
 </body>
 </html>
