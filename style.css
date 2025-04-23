@@ -1,0 +1,46 @@
+/* style.css */
+html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; font-family: sans-serif; background-color: #333; }
+body { display: flex; justify-content: center; align-items: center; }
+#game-container { position: relative; width: 90vw; height: 85vh; max-width: 1600px; max-height: 900px; /* aspect-ratio: 16 / 9; */ background-color: #87CEEB; overflow: hidden; border: 2px solid #eee; user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; outline: none; box-shadow: 0 0 15px rgba(0,0,0,0.5); }
+#player { position: absolute; width: 35px; height: 35px; border: 1px solid #b89b00; border-radius: 50%; z-index: 10; transition: background-color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease, transform 0.1s linear; }
+#player-effect { position: absolute; top: -5px; left: -5px; width: calc(100% + 10px); height: calc(100% + 10px); border-radius: 50%; z-index: -1; opacity: 0; transition: opacity 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; }
+#player.dash-active { box-shadow: 0 0 15px 5px rgba(0, 255, 255, 0.7); }
+#player.multiplier-active { box-shadow: 0 0 15px 5px rgba(255, 215, 0, 0.7); }
+#player.shield-active #player-effect { opacity: 1; background-color: rgba(100, 150, 255, 0.3); box-shadow: 0 0 10px 3px rgba(100, 150, 255, 0.6); }
+#player.wreckingball-ready { box-shadow: 0 0 10px 4px rgba(255, 69, 0, 0.6); }
+#player.rainbow-active { animation: rainbow-bg 1s linear infinite; }
+@keyframes rainbow-bg { 0% { background-color: rgba(255, 0, 0, 0.7); } 17% { background-color: rgba(255, 165, 0, 0.7); } 34% { background-color: rgba(255, 255, 0, 0.7); } 51% { background-color: rgba(0, 255, 0, 0.7); } 68% { background-color: rgba(0, 0, 255, 0.7); } 85% { background-color: rgba(75, 0, 130, 0.7); } 100% { background-color: rgba(238, 130, 238, 0.7); } }
+#instructions, #game-over-message { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80%; max-width: 500px; text-align: center; color: white; font-size: 1.5em; line-height: 1.6; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.7); z-index: 30; pointer-events: none; background-color: rgba(0, 0, 0, 0.3); padding: 20px; border-radius: 10px; }
+#start-prompt { font-size: 0.8em; margin-top: 15px; }
+kbd { display: inline-block; padding: 3px 5px; font: 11px Consolas,"Liberation Mono",Menlo,Courier,monospace; line-height: 10px; color: #555; vertical-align: middle; background-color: #fcfcfc; border: solid 1px #ccc; border-bottom-color: #bbb; border-radius: 3px; box-shadow: inset 0 -1px 0 #bbb; }
+#game-over-message { font-size: 2em; background-color: rgba(0, 0, 0, 0.6); }
+#game-over-message kbd { color: #333; background-color: #eee; }
+#score-display { position: absolute; top: 15px; left: 15px; color: white; font-size: 1.5em; font-weight: bold; text-shadow: 1px 1px 2px black; z-index: 20; pointer-events: none; }
+#powerup-timers { position: absolute; top: 50px; left: 15px; color: white; font-size: 0.9em; font-weight: bold; text-shadow: 1px 1px 2px black; z-index: 20; pointer-events: none; display: flex; flex-direction: column; gap: 5px; }
+.timer-display { background-color: rgba(0,0,0,0.4); padding: 3px 6px; border-radius: 4px; }
+#status-icons { position: absolute; top: 15px; right: 15px; display: flex; gap: 8px; z-index: 20; pointer-events: none; }
+.status-icon { font-size: 1.8em; opacity: 0.9; text-shadow: 1px 1px 3px rgba(0,0,0,0.7); }
+.pipe { position: absolute; width: 70px; background-color: #228B22; border: 2px solid #006400; z-index: 5; }
+.pipe-top { border-bottom-left-radius: 5px; border-bottom-right-radius: 5px; }
+.pipe-bottom { border-top-left-radius: 5px; border-top-right-radius: 5px; }
+.collectible { position: absolute; width: 18px; height: 18px; background-color: #7FFF00; border: 1px solid #3f8000; border-radius: 50%; z-index: 6; box-shadow: 0 0 6px #7FFF00; }
+.hazard { position: absolute; width: 22px; height: 22px; background-color: red; border: 1px solid darkred; border-radius: 3px; z-index: 6; box-shadow: 0 0 6px red; }
+.powerup-dash { position: absolute; width: 20px; height: 20px; background-color: #00FFFF; border: 1px solid #008B8B; border-radius: 20% 50% 50% 50%; transform: rotate(45deg); z-index: 7; box-shadow: 0 0 8px #00FFFF; }
+.powerup-multiplier { position: absolute; width: 20px; height: 20px; background-color: #FFD700; border: 1px solid #B8860B; border-radius: 5px; z-index: 7; box-shadow: 0 0 8px #FFD700; display: flex; justify-content: center; align-items: center; }
+.powerup-multiplier::before { content: "x2"; color: #8B4513; font-size: 12px; font-weight: bold; }
+.powerup-shield { position: absolute; width: 22px; height: 22px; background: radial-gradient(circle, rgba(173,216,230,1) 30%, rgba(65,105,225,1) 100%); border: 1px solid #4169E1; border-radius: 50%; z-index: 7; box-shadow: 0 0 8px #ADD8E6; }
+.powerup-vacuum { position: absolute; width: 20px; height: 20px; background-color: #808080; border: 1px solid #404040; border-radius: 50%; z-index: 7; box-shadow: 0 0 8px #A9A9A9; }
+.powerup-vacuum::before { content:"🧲"; font-size: 16px; line-height: 20px; text-align: center; display:block; }
+.powerup-slowmo { position: absolute; width: 20px; height: 20px; background-color: #DAA520; border: 1px solid #8B4513; border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; z-index: 7; box-shadow: 0 0 8px #F4A460; }
+.powerup-wreckingball { position: absolute; width: 22px; height: 22px; background-color: #444; border: 1px solid black; border-radius: 50%; z-index: 7; box-shadow: 0 0 8px #666; }
+.powerup-wreckingball::before { content:"💣"; font-size: 16px; line-height: 22px; text-align: center; display:block; }
+.powerup-alchemy { position: absolute; width: 20px; height: 20px; background: linear-gradient(45deg, #FFC0CB, #EE82EE); border: 1px solid #8A2BE2; border-radius: 4px; transform: rotate(45deg); z-index: 7; box-shadow: 0 0 8px #DA70D6; }
+.powerup-rainbow { position: absolute; width: 22px; height: 22px; background: conic-gradient(red, yellow, lime, aqua, blue, magenta, red); border-radius: 50%; border: 1px solid white; z-index: 7; box-shadow: 0 0 8px white; }
+.gravity-zone { position: absolute; top: 0; height: 100%; border-left: 2px dashed rgba(255, 255, 255, 0.4); border-right: 2px dashed rgba(255, 255, 255, 0.4); z-index: 1; pointer-events: none; box-sizing: border-box; transition: background-color 0.5s ease; }
+.gravity-zone.flipped { background-color: rgba(255, 100, 0, 0.12); border-left-color: rgba(255, 165, 0, 0.5); border-right-color: rgba(255, 165, 0, 0.5); }
+.gravity-zone.low-g { background-color: rgba(144, 238, 144, 0.1); border-left-color: rgba(144, 238, 144, 0.5); border-right-color: rgba(144, 238, 144, 0.5); }
+.gravity-zone.high-g { background-color: rgba(255, 0, 0, 0.1); border-left-color: rgba(255, 150, 150, 0.5); border-right-color: rgba(255, 150, 150, 0.5); }
+.gravity-zone.floaty { background-color: rgba(135, 206, 250, 0.15); border-left-color: rgba(176, 224, 230, 0.6); border-right-color: rgba(176, 224, 230, 0.6); }
+.gravity-zone.zero-g { background-color: rgba(100, 100, 100, 0.1); border-left: 2px dotted rgba(200, 200, 200, 0.5); border-right: 2px dotted rgba(200, 200, 200, 0.5); }
+#charge-indicator-bar { position: absolute; bottom: 15px; left: 15px; width: 120px; height: 18px; background-color: rgba(0, 0, 0, 0.3); border: 1px solid white; border-radius: 3px; z-index: 20; display: none; pointer-events: none; }
+#charge-indicator-fill { width: 0%; height: 100%; background-color: yellow; border-radius: 2px; transition: width 0.05s linear; }
